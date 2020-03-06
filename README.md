@@ -4,7 +4,7 @@ A custom photography website.
 ## Technologies
 - React
 - Material UI
-- 
+
 Run the project with:
 ### `npm start`
 
