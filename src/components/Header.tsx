@@ -1,5 +1,6 @@
 import React from 'react';
 import {AppBar, Toolbar, IconButton,Typography, makeStyles} from '@material-ui/core'
+import MenuIcon from '@material-ui/icons/Menu';
 import  '../Fonts.css';
 
 const font = "'Concert One', cursive;";
@@ -30,6 +31,7 @@ const Header: React.FC<{}> = () => {
         <AppBar  className={classes.appBar}>
         <Toolbar>
           <IconButton edge="start" color="inherit" className={classes.menuButton} aria-label="menu">
+            <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
             A fucking awesome name I need to figure out
