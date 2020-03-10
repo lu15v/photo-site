@@ -1,6 +1,7 @@
 import React from 'react';
 import {AppBar, Toolbar, IconButton,Typography, makeStyles} from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu';
+import TempDrawer from './TempDrawer';
 import  '../Fonts.css';
 
 const font = "'Concert One', cursive;";
@@ -27,16 +28,25 @@ const useStyles = makeStyles(theme => ({
 
 const Header: React.FC<{}> = () => {
     const classes = useStyles();
+    const [open, setOpen] = React.useState(false);
+    const handleDrawerOpen = () => {
+      setOpen(true);
+    };
+  
+    const handleDrawerClose = () => {
+      setOpen(false);
+    };
     return(
         <AppBar  className={classes.appBar}>
         <Toolbar>
-          <IconButton edge="start" color="inherit" className={classes.menuButton} aria-label="menu">
-            <MenuIcon />
+          <IconButton edge="start" color="inherit" className={classes.menuButton} aria-label="menu"onClick={handleDrawerOpen} >
+            <MenuIcon/>
           </IconButton>
           <Typography variant="h6" className={classes.title}>
             A fucking awesome name I need to figure out
           </Typography>
         </Toolbar>
+        <TempDrawer  drawerClose={handleDrawerClose} open={open}/>
       </AppBar>
     );
 }
