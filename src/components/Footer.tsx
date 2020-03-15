@@ -3,7 +3,7 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import {AppBar, Container} from '@material-ui/core';
 import  '../Fonts.css';
 
-const font = "'Averia Sans Libre', cursive";
+const font = "'EB Garamond', serif";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
