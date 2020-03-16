@@ -16,6 +16,9 @@ const useStyles = makeStyles((theme: Theme) =>
       width: "100%",
       height: "100%",
     },
+    gridListTile: {
+      cursor: 'pointer'
+    }
   }),
 );
 
@@ -30,7 +33,7 @@ const ImageGridList: React.FC<GalleryList> = (props) =>{
     <div className={classes.root}>
       <GridList cellHeight={170} className={classes.gridList} cols={12}>
         {props.galleryList.map(tile => (
-          <GridListTile key={tile.img} cols={tile.cols || 1}>
+          <GridListTile className={classes.gridListTile} key={tile.img} cols={tile.cols || 1} onClick={()=> console.log(tile.img)}>
             <img src={tile.img} alt={tile.title} />
           </GridListTile>
         ))}
