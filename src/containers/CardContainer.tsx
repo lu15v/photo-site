@@ -2,8 +2,12 @@ import React from 'react';
 import ImageGridList from '../components/ImageGridList';
 import {ImageData} from '../typings';
 
-class CardContainer extends React.Component<{contentList: ImageData[]},{}>{
+interface CardContainerProps{
+    contentList: ImageData[]
+}
 
+class CardContainer extends React.Component<CardContainerProps, {}>{
+    
     render(){
         return(
             <div>
