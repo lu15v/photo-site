@@ -1,8 +1,9 @@
 import React from 'react';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
 import {ImageData} from '../typings';
+import GridListTile from '@material-ui/core/GridListTile';
+import CustomizedDialog from './CustomizedDialog';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,21 +24,35 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface GalleryList {
-  galleryList: ImageData[],
+  galleryList: ImageData[]
  }
 
 const ImageGridList: React.FC<GalleryList> = (props) =>{
+
+  const [input, setInput] = React.useState({
+    open: false,
+    id: '',
+  });
+  const handleClickOpen = (id:string) => {
+    setInput({open: true, id: id})
+  };
+  const handleClose = () => {
+    setInput({open: false, id: input.id})
+  };
+
   const classes = useStyles();
+  const {galleryList} = props;
 
   return (
     <div className={classes.root}>
       <GridList cellHeight={170} className={classes.gridList} cols={12}>
-        {props.galleryList.map(tile => (
-          <GridListTile className={classes.gridListTile} key={tile.img} cols={tile.cols || 1} onClick={()=> console.log(tile.img)}>
-            <img src={tile.img} alt={tile.title} />
+      {galleryList.map(tile => (
+          <GridListTile key={tile.id} cols={tile.cols || 1} className={classes.gridListTile} onClick={() => handleClickOpen(tile.id)}>
+            <img src={tile.img} alt={tile.title} /> 
           </GridListTile>
         ))}
       </GridList>
+      <CustomizedDialog  show={input.open} handleClose={handleClose} id={input.id}/>
     </div>
   );
   }
