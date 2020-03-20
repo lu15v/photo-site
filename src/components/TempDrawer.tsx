@@ -58,6 +58,10 @@ const useStyles = makeStyles((theme: Theme) =>
       ...theme.mixins.toolbar,
       justifyContent: 'flex-end',
     },
+    large: {
+      width: theme.spacing(7),
+      height: theme.spacing(7),
+    },
   }),
 );
 interface DrawerProps {
@@ -83,7 +87,7 @@ const TempDrawer: React.FC<DrawerProps> = (props) => {
           </IconButton>
         </div>
         <div className={classes.avatar}>
-          <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+          <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" className={classes.large}/>
         </div>
         <h1 className={classes.header}>Luis Ballinas</h1>
         <Card variant="outlined" className={classes.cardInfo}>
