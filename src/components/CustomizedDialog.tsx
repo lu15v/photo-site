@@ -11,9 +11,11 @@ import CardMedia from '@material-ui/core/CardMedia';
 
 const styles = (theme: Theme) =>
   createStyles({
-    root: {
+    dialogTitle: {
       margin: 0,
       padding: theme.spacing(2),
+      background: '#2b2626',
+      color: '#9e9e9e'
     },
     closeButton: {
       position: 'absolute',
@@ -21,6 +23,9 @@ const styles = (theme: Theme) =>
       top: theme.spacing(1),
       color: theme.palette.grey[500],
     },
+    mediaDialogContent:{
+      background: '#2b2626'
+    }
   });
 
 export interface DialogTitleProps extends WithStyles<typeof styles> {
@@ -32,7 +37,7 @@ export interface DialogTitleProps extends WithStyles<typeof styles> {
 const DialogTitle = withStyles(styles)((props: DialogTitleProps) => {
   const { children, classes, onClose, ...other } = props;
   return (
-    <MuiDialogTitle disableTypography className={classes.root} {...other}>
+    <MuiDialogTitle disableTypography className={classes.dialogTitle} {...other}>
       <Typography variant="h6">{children}</Typography>
       {onClose ? (
         <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
@@ -56,30 +61,36 @@ const DialogActions = withStyles((theme: Theme) => ({
   },
 }))(MuiDialogActions);
 
-export interface CustomDialogProps{
+export interface CustomDialogProps extends WithStyles<typeof styles>{
     show: boolean;
     handleClose: () => void;
     id: string
 }
-
-const CustomizedDialog: React.FC<CustomDialogProps> = (props) => {
-  const {handleClose, show, id} = props;
-  return (
-    <div>
-      <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={show}>
-        <DialogTitle id="customized-dialog-title" onClose={() => handleClose()}>
-          Modal title {id}
-        </DialogTitle>
-        <DialogContent dividers>
-        <CardMedia>
-          <img src="https://i.picsum.photos/id/156/300/450.jpg"/>
-        </CardMedia>
-        </DialogContent>
-        <DialogActions>
-        </DialogActions>
-      </Dialog>
-    </div>
-  );
+interface CardMediaProps extends WithStyles<typeof styles> {
+  src: string;
 }
+
+const Media = withStyles(styles)((props: CardMediaProps) => {
+  const {src} = props;
+  return(
+    <CardMedia>
+      <img src={src}/>
+    </CardMedia>
+  );
+});
+
+const CustomizedDialog = withStyles(styles)((props: CustomDialogProps) => {
+  const {handleClose, show, id, classes} = props;
+  return (
+    <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={show} >
+      <DialogTitle id="customized-dialog-title"  onClose={() => handleClose()} >
+        Modal title {id}
+      </DialogTitle>
+      <DialogContent dividers className={classes.mediaDialogContent}>
+        <Media src="https://i.picsum.photos/id/156/300/450.jpg"/>
+      </DialogContent>
+    </Dialog>
+  );
+});
 
 export default CustomizedDialog;
