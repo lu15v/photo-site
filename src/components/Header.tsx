@@ -3,6 +3,7 @@ import {AppBar, Toolbar, IconButton,Typography, makeStyles} from '@material-ui/c
 import MenuIcon from '@material-ui/icons/Menu';
 import TempDrawer from './TempDrawer';
 import  '../Fonts.css';
+import logo from "../logo.png";
 
 const font = "'Concert One', cursive;";
 
@@ -24,6 +25,12 @@ const useStyles = makeStyles(theme => ({
       flexGrow: 1,
       fontFamily: font
     },
+    logo:{
+      width: "65px",
+      height: "55px",
+      marginLeft: "auto",
+      marginRight: "auto"
+    }
   }));
 
 const Header: React.FC<{}> = () => {
@@ -42,9 +49,7 @@ const Header: React.FC<{}> = () => {
           <IconButton edge="start" color="inherit" className={classes.menuButton} aria-label="menu"onClick={handleDrawerOpen} >
             <MenuIcon/>
           </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            A fucking awesome name I need to figure out
-          </Typography>
+          <img className={classes.logo } src={logo}/>
         </Toolbar>
         <TempDrawer  drawerClose={handleDrawerClose} open={open}/>
       </AppBar>
