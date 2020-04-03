@@ -3,7 +3,6 @@ import { createStyles, Theme, withStyles, WithStyles } from '@material-ui/core/s
 import Dialog from '@material-ui/core/Dialog';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import MuiDialogContent from '@material-ui/core/DialogContent';
-import MuiDialogActions from '@material-ui/core/DialogActions';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
@@ -54,13 +53,6 @@ const DialogContent = withStyles((theme: Theme) => ({
   },
 }))(MuiDialogContent);
 
-const DialogActions = withStyles((theme: Theme) => ({
-  root: {
-    margin: 0,
-    padding: theme.spacing(1),
-  },
-}))(MuiDialogActions);
-
 export interface CustomDialogProps extends WithStyles<typeof styles>{
     show: boolean;
     handleClose: () => void;
@@ -74,7 +66,7 @@ const Media = withStyles(styles)((props: CardMediaProps) => {
   const {src} = props;
   return(
     <CardMedia>
-      <img src={src}/>
+      <img alt="" src={src}/>
     </CardMedia>
   );
 });

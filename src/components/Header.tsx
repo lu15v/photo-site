@@ -1,5 +1,5 @@
 import React from 'react';
-import {AppBar, Toolbar, IconButton,Typography, makeStyles} from '@material-ui/core'
+import {AppBar, Toolbar, IconButton, makeStyles} from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu';
 import TempDrawer from './TempDrawer';
 import  '../Fonts.css';
@@ -48,7 +48,7 @@ const Header: React.FC<{}> = () => {
           <IconButton edge="start" color="inherit" className={classes.menuButton} aria-label="menu"onClick={handleDrawerOpen} >
             <MenuIcon/>
           </IconButton>
-          <img className={classes.logo } src={logo}/>
+          <img alt="logo" className={classes.logo } src={logo}/>
         </Toolbar>
         <TempDrawer  drawerClose={handleDrawerClose} open={open}/>
       </AppBar>
