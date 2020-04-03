@@ -4,6 +4,7 @@ import GridList from '@material-ui/core/GridList';
 import {ImageData} from '../typings';
 import GridListTile from '@material-ui/core/GridListTile';
 import CustomizedDialog from './CustomizedDialog';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -28,6 +29,8 @@ interface GalleryList {
  }
 
 const ImageGridList: React.FC<GalleryList> = (props) =>{
+  const {galleryList} = props;
+  const classes = useStyles();
 
   const [input, setInput] = React.useState({
     open: false,
@@ -39,15 +42,15 @@ const ImageGridList: React.FC<GalleryList> = (props) =>{
   const handleClose = () => {
     setInput({open: false, id: input.id})
   };
+  const lg = useMediaQuery('(min-width:400px)');
 
-  const classes = useStyles();
-  const {galleryList} = props;
+  let colsTile = lg === true ? 3 : 4;
 
   return (
     <div className={classes.root}>
-      <GridList cellHeight={170} className={classes.gridList} cols={12}>
+      <GridList cellHeight={160} className={classes.gridList} cols={12}>
       {galleryList.map(tile => (
-          <GridListTile key={tile.id} cols={tile.cols || 1} className={classes.gridListTile} onClick={() => handleClickOpen(tile.id)}>
+          <GridListTile key={tile.id} cols={colsTile} className={classes.gridListTile} onClick={() => handleClickOpen(tile.id)}>
             <img src={tile.img} alt={tile.title} /> 
           </GridListTile>
         ))}

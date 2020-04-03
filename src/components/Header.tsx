@@ -26,7 +26,6 @@ const useStyles = makeStyles(theme => ({
       fontFamily: font
     },
     logo:{
-      width: "65px",
       height: "55px",
       marginLeft: "auto",
       marginRight: "auto"
