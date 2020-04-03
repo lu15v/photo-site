@@ -7,6 +7,7 @@ import CustomizedDialog from './CustomizedDialog';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import IconButton from '@material-ui/core/IconButton';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+//import FavoriteIcon from '@material-ui/icons/Favorite';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -52,6 +53,10 @@ const ImageGridList: React.FC<GalleryList> = (props) =>{
   const handleClose = () => {
     setInput({open: false, id: input.id})
   };
+
+  const handleLike = () => {
+    
+  }
   const lg = useMediaQuery('(min-width:400px)');
 
   let colsTile = lg === true ? 3 : 4;
@@ -68,7 +73,7 @@ const ImageGridList: React.FC<GalleryList> = (props) =>{
                 title: classes.title,
               }}
               actionIcon={
-                <IconButton aria-label={`${tile.title}`}>
+                <IconButton aria-label={`${tile.title}`} onClick={handleLike}>
                   <FavoriteBorderIcon className={classes.title} />
                 </IconButton>
               }
