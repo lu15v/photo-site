@@ -24,6 +24,11 @@ const styles = (theme: Theme) =>
     },
     mediaDialogContent:{
       background: '#2b2626'
+    },
+    picture:{
+      maxWidth: '100%',
+      maxHeight: '100%',
+      display: 'block',
     }
   });
 
@@ -74,12 +79,12 @@ const Media = withStyles(styles)((props: CardMediaProps) => {
 const CustomizedDialog = withStyles(styles)((props: CustomDialogProps) => {
   const {handleClose, show, id, classes} = props;
   return (
-    <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={show} >
+    <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={show}>
       <DialogTitle id="customized-dialog-title"  onClose={() => handleClose()} >
         Modal title {id}
       </DialogTitle>
       <DialogContent dividers className={classes.mediaDialogContent}>
-        <Media src="https://i.picsum.photos/id/156/300/450.jpg"/>
+        <img  className={classes.picture} src="https://i.picsum.photos/id/156/1700/1450.jpg"/>
       </DialogContent>
     </Dialog>
   );
