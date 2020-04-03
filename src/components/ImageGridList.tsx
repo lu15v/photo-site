@@ -5,6 +5,9 @@ import {ImageData} from '../typings';
 import GridListTile from '@material-ui/core/GridListTile';
 import CustomizedDialog from './CustomizedDialog';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
+import IconButton from '@material-ui/core/IconButton';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import GridListTileBar from '@material-ui/core/GridListTileBar';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -20,6 +23,13 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     gridListTile: {
       cursor: 'pointer'
+    },
+    title: {
+      color: 'white',
+    },
+    titleBar: {
+      background:
+        'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
     }
   }),
 );
@@ -50,8 +60,19 @@ const ImageGridList: React.FC<GalleryList> = (props) =>{
     <div className={classes.root}>
       <GridList cellHeight={160} className={classes.gridList} cols={12}>
       {galleryList.map(tile => (
-          <GridListTile key={tile.id} cols={colsTile} className={classes.gridListTile} onClick={() => handleClickOpen(tile.id)}>
-            <img src={tile.img} alt={tile.title} /> 
+          <GridListTile key={tile.id} cols={colsTile} className={classes.gridListTile}>
+            <img src={tile.img} alt={tile.title} onClick={() => handleClickOpen(tile.id)} /> 
+            <GridListTileBar
+              classes={{
+                root: classes.titleBar,
+                title: classes.title,
+              }}
+              actionIcon={
+                <IconButton aria-label={`${tile.title}`}>
+                  <FavoriteBorderIcon className={classes.title} />
+                </IconButton>
+              }
+            />
           </GridListTile>
         ))}
       </GridList>
