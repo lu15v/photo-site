@@ -68,10 +68,10 @@ interface CardMediaProps extends WithStyles<typeof styles> {
 }
 
 const Media = withStyles(styles)((props: CardMediaProps) => {
-  const {src} = props;
+  const {src, classes} = props;
   return(
-    <CardMedia>
-      <img alt="" src={src}/>
+    <CardMedia> 
+      <img className={classes.picture} alt="" src={src}/>
     </CardMedia>
   );
 });
@@ -84,7 +84,7 @@ const CustomizedDialog = withStyles(styles)((props: CustomDialogProps) => {
         Modal title {id}
       </DialogTitle>
       <DialogContent dividers className={classes.mediaDialogContent}>
-        <img  className={classes.picture} src="https://i.picsum.photos/id/156/1700/1450.jpg"/>
+        <Media src="https://i.picsum.photos/id/156/1700/1450.jpg" />
       </DialogContent>
     </Dialog>
   );
