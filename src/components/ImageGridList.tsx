@@ -7,7 +7,7 @@ import CustomizedDialog from './CustomizedDialog';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import IconButton from '@material-ui/core/IconButton';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
-//import FavoriteIcon from '@material-ui/icons/Favorite';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -46,19 +46,37 @@ const ImageGridList: React.FC<GalleryList> = (props) =>{
   const [input, setInput] = React.useState({
     open: false,
     id: '',
+    //liked: {}
+    liked: false
   });
   const handleClickOpen = (id:string) => {
-    setInput({open: true, id: id})
+    setInput({open: true, id: id, liked: input.liked})
   };
   const handleClose = () => {
-    setInput({open: false, id: input.id})
+    setInput({open: false, id: input.id, liked: input.liked})
   };
 
-  const handleLike = () => {
+  const handleLike = (id:string) => {
+    //let tempObj:any = {};
+    //tempObj[id] = id;
     
+    if(idIsPresent(id)){
+      //let likedCopy:any = {...input.liked};
+      //delete likedCopy[id];
+      //setInput({open: input.open, id: input.id, liked: likedCopy})
+      localStorage.removeItem(id);
+      setInput({open: input.open, id: input.id, liked: false})
+    }else{
+      //setInput({open: input.open, id: input.id, liked: {...input.liked, ...tempObj}})
+      localStorage.setItem(id, id);
+      setInput({open: input.open, id: input.id, liked: true})
+    }
   }
   const lg = useMediaQuery('(min-width:400px)');
-
+  
+  const idIsPresent = (id:string) => {
+    return localStorage.getItem(id) !== null;
+  }
   let colsTile = lg === true ? 3 : 4;
 
   return (
@@ -73,8 +91,8 @@ const ImageGridList: React.FC<GalleryList> = (props) =>{
                 title: classes.title,
               }}
               actionIcon={
-                <IconButton aria-label={`${tile.title}`} onClick={handleLike}>
-                  <FavoriteBorderIcon className={classes.title} />
+                <IconButton aria-label={`${tile.title}`} onClick={() => handleLike(tile.id)}>
+                  {idIsPresent(tile.id) ? <FavoriteIcon className={classes.title} /> : <FavoriteBorderIcon className={classes.title} />}
                 </IconButton>
               }
             />
