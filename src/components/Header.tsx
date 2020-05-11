@@ -1,6 +1,6 @@
 import React from 'react';
 import {AppBar, Toolbar, IconButton, makeStyles} from '@material-ui/core'
-import MenuIcon from '@material-ui/icons/Menu';
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import TempDrawer from './TempDrawer';
 import  '../Fonts.css';
 import logo from "../logo.png";
@@ -46,7 +46,7 @@ const Header: React.FC<{}> = () => {
         <AppBar  className={classes.appBar}>
         <Toolbar>
           <IconButton edge="start" color="inherit" className={classes.menuButton} aria-label="menu"onClick={handleDrawerOpen} >
-            <MenuIcon/>
+            <ArrowForwardIosIcon/>
           </IconButton>
           <img alt="logo" className={classes.logo } src={logo}/>
         </Toolbar>

@@ -31,6 +31,7 @@ const styles = (theme: Theme) =>
       maxWidth: '100%',
       maxHeight: '100%',
       display: 'block',
+      marginBottom: '7px'
     },
     imageDialog:{
       position:'relative'
@@ -103,7 +104,7 @@ const CustomizedDialog = withStyles(styles)((props: CustomDialogProps) => {
       </DialogTitle>
       <DialogContent dividers className={classes.mediaDialogContent}>
         <Media src="https://i.picsum.photos/id/156/1700/1450.jpg" handleLike={handleLike} likeIcon={likeIcon} id={id}/>
-        <CardCustom author="Ballinas Luis" place="Mexico" name="Foots"/>
+        <CardCustom  author="Ballinas Luis" place="Mexico" name="Foots"/>
       </DialogContent>
     </Dialog>
   );
