@@ -22,21 +22,27 @@ const useStyles = makeStyles({
     },
   });
 
+  interface CardCustomProps {
+    author: string
+    place: string
+    name: string
+  }
 
-const CardCustom: React.FC<{}> = () => {
+const CardCustom: React.FC<CardCustomProps> = (props) => {
     const classes = useStyles();
+    const{author, place, name} = props;
 
     return(
         <Card className={classes.root} variant="outlined">
             <CardContent>
                 <Typography variant="h5" component="h2">
-                  Ballinas Luis
+                  {author}
                 </Typography>
                 <Typography className={classes.pos} color="textSecondary">
-                  Mexico, 2019-2020
+                  {place}
                 </Typography>
                 <Typography variant="body2" component="p">
-                 <b>Foots</b> 2020
+                 <b>{name}</b> 2020
                 </Typography>
                 <Typography variant="body2" component="p">
                  Some Fancy Photography Style
