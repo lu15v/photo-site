@@ -7,6 +7,8 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
 import CardMedia from '@material-ui/core/CardMedia';
+import CardCustom from './CardCustom';
+
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -81,10 +83,10 @@ const CustomizedDialog = withStyles(styles)((props: CustomDialogProps) => {
   return (
     <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={show}>
       <DialogTitle id="customized-dialog-title"  onClose={() => handleClose()} >
-        Modal title {id}
       </DialogTitle>
       <DialogContent dividers className={classes.mediaDialogContent}>
         <Media src="https://i.picsum.photos/id/156/1700/1450.jpg" />
+        <CardCustom author="Ballinas Luis" place="Mexico" name="Foots"/>
       </DialogContent>
     </Dialog>
   );
