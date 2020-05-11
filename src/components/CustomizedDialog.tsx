@@ -20,7 +20,7 @@ const styles = (theme: Theme) =>
     },
     closeButton: {
       position: 'absolute',
-      right: theme.spacing(1),
+      right: theme.spacing(0),
       top: theme.spacing(1),
       color: theme.palette.grey[500],
     },
