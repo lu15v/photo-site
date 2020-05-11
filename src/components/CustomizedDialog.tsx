@@ -31,6 +31,15 @@ const styles = (theme: Theme) =>
       maxWidth: '100%',
       maxHeight: '100%',
       display: 'block',
+    },
+    imageDialog:{
+      position:'relative'
+    },
+    likeIcon:{
+      position: 'absolute',
+      bottom: 0,
+      right: 0,
+      float: 'right'
     }
   });
 
@@ -63,29 +72,37 @@ const DialogContent = withStyles((theme: Theme) => ({
 export interface CustomDialogProps extends WithStyles<typeof styles>{
     show: boolean;
     handleClose: () => void;
-    id: string
+    id: string,
+    likeIcon: (id: string) => JSX.Element;
+    handleLike: (id: string) => void;
 }
 interface CardMediaProps extends WithStyles<typeof styles> {
-  src: string;
+  src: string
+  id: string,
+  likeIcon: (id: string) => JSX.Element;
+  handleLike: (id: string) => void;
 }
 
 const Media = withStyles(styles)((props: CardMediaProps) => {
-  const {src, classes} = props;
+  const {src, classes, id, likeIcon, handleLike} = props;
   return(
-    <CardMedia> 
+    <CardMedia className={classes.imageDialog}> 
       <img className={classes.picture} alt="" src={src}/>
+      <IconButton onClick={() => handleLike(id)} className={classes.likeIcon}>
+          {likeIcon(id)}
+      </IconButton>
     </CardMedia>
   );
 });
 
 const CustomizedDialog = withStyles(styles)((props: CustomDialogProps) => {
-  const {handleClose, show, id, classes} = props;
+  const {handleClose, show, id, classes, likeIcon, handleLike} = props;
   return (
     <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={show}>
       <DialogTitle id="customized-dialog-title"  onClose={() => handleClose()} >
       </DialogTitle>
       <DialogContent dividers className={classes.mediaDialogContent}>
-        <Media src="https://i.picsum.photos/id/156/1700/1450.jpg" />
+        <Media src="https://i.picsum.photos/id/156/1700/1450.jpg" handleLike={handleLike} likeIcon={likeIcon} id={id}/>
         <CardCustom author="Ballinas Luis" place="Mexico" name="Foots"/>
       </DialogContent>
     </Dialog>

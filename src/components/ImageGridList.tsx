@@ -74,9 +74,10 @@ const ImageGridList: React.FC<GalleryList> = (props) =>{
   }
   const lg = useMediaQuery('(min-width:400px)');
   
-  const idIsPresent = (id:string) => {
-    return localStorage.getItem(id) !== null;
-  }
+  const idIsPresent = (id:string) => localStorage.getItem(id) !== null;
+
+  const favIcon = (id:string) => idIsPresent(id) ? <FavoriteIcon className={classes.title} /> : <FavoriteBorderIcon className={classes.title} />
+
   let colsTile = lg === true ? 3 : 4;
 
   return (
@@ -92,14 +93,14 @@ const ImageGridList: React.FC<GalleryList> = (props) =>{
               }}
               actionIcon={
                 <IconButton aria-label={`${tile.title}`} onClick={() => handleLike(tile.id)}>
-                  {idIsPresent(tile.id) ? <FavoriteIcon className={classes.title} /> : <FavoriteBorderIcon className={classes.title} />}
+                  {favIcon(tile.id)}
                 </IconButton>
               }
             />
           </GridListTile>
         ))}
       </GridList>
-      <CustomizedDialog  show={input.open} handleClose={handleClose} id={input.id}/>
+      <CustomizedDialog likeIcon={favIcon} handleLike={handleLike} show={input.open} handleClose={handleClose} id={input.id}/>
     </div>
   );
   }
