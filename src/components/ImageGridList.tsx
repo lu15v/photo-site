@@ -47,29 +47,30 @@ const ImageGridList: React.FC<GalleryList> = (props) =>{
     open: false,
     id: '',
     //liked: {}
-    liked: false
+    liked: false,
+    img: ''
   });
-  const handleClickOpen = (id:string) => {
-    setInput({open: true, id: id, liked: input.liked})
+  const handleClickOpen = (id:string, img:string) => {
+    setInput({open: true, id: id, liked: input.liked, img: img})
   };
   const handleClose = () => {
-    setInput({open: false, id: input.id, liked: input.liked})
+    setInput({open: false, id: input.id, liked: input.liked, img: ''})
   };
 
   const handleLike = (id:string) => {
     //let tempObj:any = {};
     //tempObj[id] = id;
-    
+    let currentImg = input.img;
     if(idIsPresent(id)){
       //let likedCopy:any = {...input.liked};
       //delete likedCopy[id];
       //setInput({open: input.open, id: input.id, liked: likedCopy})
       localStorage.removeItem(id);
-      setInput({open: input.open, id: input.id, liked: false})
+      setInput({open: input.open, id: input.id, liked: false, img: currentImg})
     }else{
       //setInput({open: input.open, id: input.id, liked: {...input.liked, ...tempObj}})
       localStorage.setItem(id, id);
-      setInput({open: input.open, id: input.id, liked: true})
+      setInput({open: input.open, id: input.id, liked: true, img: currentImg})
     }
   }
   const lg = useMediaQuery('(min-width:400px)');
@@ -85,7 +86,7 @@ const ImageGridList: React.FC<GalleryList> = (props) =>{
       <GridList cellHeight={160} className={classes.gridList} cols={12}>
       {galleryList.map(tile => (
           <GridListTile key={tile.id} cols={colsTile} className={classes.gridListTile}>
-            <img src={tile.img} alt={tile.title} onClick={() => handleClickOpen(tile.id)} /> 
+            <img src={tile.img} alt={tile.title} onClick={() => handleClickOpen(tile.id, tile.img)} /> 
             <GridListTileBar
               classes={{
                 root: classes.titleBar,
@@ -100,7 +101,7 @@ const ImageGridList: React.FC<GalleryList> = (props) =>{
           </GridListTile>
         ))}
       </GridList>
-      <CustomizedDialog likeIcon={favIcon} handleLike={handleLike} show={input.open} handleClose={handleClose} id={input.id}/>
+      <CustomizedDialog likeIcon={favIcon} handleLike={handleLike} show={input.open} img={input.img}handleClose={handleClose} id={input.id}/>
     </div>
   );
   }

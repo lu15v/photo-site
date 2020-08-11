@@ -76,6 +76,7 @@ export interface CustomDialogProps extends WithStyles<typeof styles>{
     id: string,
     likeIcon: (id: string) => JSX.Element;
     handleLike: (id: string) => void;
+    img: string
 }
 interface CardMediaProps extends WithStyles<typeof styles> {
   src: string
@@ -97,13 +98,13 @@ const Media = withStyles(styles)((props: CardMediaProps) => {
 });
 
 const CustomizedDialog = withStyles(styles)((props: CustomDialogProps) => {
-  const {handleClose, show, id, classes, likeIcon, handleLike} = props;
+  const {handleClose, show, id, classes, likeIcon, handleLike, img} = props;
   return (
     <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={show}>
       <DialogTitle id="customized-dialog-title"  onClose={() => handleClose()} >
       </DialogTitle>
       <DialogContent dividers className={classes.mediaDialogContent}>
-        <Media src="https://i.picsum.photos/id/156/1700/1450.jpg" handleLike={handleLike} likeIcon={likeIcon} id={id}/>
+        <Media src={img} handleLike={handleLike} likeIcon={likeIcon} id={id}/>
         <CardCustom  author="Ballinas Luis" place="Mexico" name="Foots"/>
       </DialogContent>
     </Dialog>
